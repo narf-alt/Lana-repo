@@ -1,0 +1,54 @@
+name: Build Lana Repo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git gnupg dpkg python3-pip
+
+      - name: Clone Silica
+        run: |
+          git clone https://github.com/Shugabuga/Silica.git silica
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --break-system-packages -r silica/requirements.txt
+
+      - name: Copy repository files
+        run: |
+          cp -r Packages silica/
+          cp -r Styles silica/
+
+      - name: Build with Silica
+        run: |
+          cd silica
+          python3 index.py
+
+      - name: Copy generated repository
+        run: |
+          rm -rf docs
+          cp -r silica/docs docs
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "Build Lana repo"
+          git push
