@@ -1,0 +1,25 @@
+{
+  "bundle_id": "com.narf.lana",
+  "name": "Lana",
+  "version": "1.0.0",
+  "tagline": "Lana iOS Theme",
+  "section": "Themes",
+  "works_min": "15.0",
+  "works_max": "26.0",
+  "developer": {
+    "name": "Narf"
+  },
+  "maintainer": {
+    "name": "Narf"
+  },
+  "dependencies": "",
+  "conflicts": "",
+  "replaces": "",
+  "provides": "",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "changes": "Initial release."
+    }
+  ]
+}
