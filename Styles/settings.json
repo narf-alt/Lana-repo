@@ -1,0 +1,14 @@
+{
+  "name": "Lana Repo",
+  "description": "Official Lana iOS Theme Repository",
+  "tint": "#6C5CE7",
+  "cname": "",
+  "maintainer": {
+    "name": "Narf"
+  },
+  "social": [],
+  "automatic_git": "false",
+  "subfolder": "",
+  "footer": "Lana Repo",
+  "enable_gpg": "false"
+}
