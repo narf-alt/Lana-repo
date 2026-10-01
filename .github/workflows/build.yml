@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git gnupg dpkg python3-pip
+          sudo apt-get install -y git gnupg dpkg python3-pip xz-utils
 
       - name: Clone Silica
         run: |
@@ -39,6 +39,10 @@ jobs:
         run: |
           cd silica
           python3 index.py
+
+      - name: Add uncompressed Packages file
+        run: |
+          xz -d -c silica/docs/Packages.xz > silica/docs/Packages
 
       - name: Copy generated repository
         run: |
