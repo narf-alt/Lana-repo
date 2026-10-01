@@ -4,7 +4,8 @@
   "tint": "#6C5CE7",
   "cname": "",
   "maintainer": {
-    "name": "Narf"
+    "name": "Narf",
+    "email": "narf.ios26@gmail.com"
   },
   "social": [],
   "automatic_git": "false",
