@@ -4,9 +4,9 @@ Architecture: iphoneos-arm
 Maintainer: Narf
 Filename: ./pkg/com.narf.lana.deb
 Size: 10115338
-MD5sum: 18563a2dbe09a74ce564601bc3c372fb
-SHA1: 81dc71aee071c04d2655a6099f0d96d4aea85031
-SHA256: 2dd1b7080908456b92f64d94ec7eb8f8dda904e1df9287dd9c9b92d513fba9f0
+MD5sum: 112eb413b219c0486cb3a1a7fe88e30d
+SHA1: 4b0df592f64ba170532827566fa81821ce131189
+SHA256: bfdd492d7e5ec63a89c3c2fc500723229f6a641bd492aa3f9864eac87ee92c58
 Section: Themes
 Description: Lana iOS Theme
 Author: Narf
