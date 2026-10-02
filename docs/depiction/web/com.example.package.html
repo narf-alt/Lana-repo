@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=0">
-    <title>Lana</title>
+    <title>Example Package</title>
     <link rel="stylesheet" type="text/css" href="../../web/index.css">
     <style>
-        a, .tint, .table-btn:after { color: #6C5CE7; }
+        a, .tint, .table-btn:after { color: #27BEF5; }
         .meta-badge {
             display: inline-flex;
             align-items: center;
@@ -54,7 +54,7 @@
         }
         .nav_btn.active {
             background: #fff;
-            color: #6C5CE7;
+            color: #27BEF5;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             border-bottom: none;
         }
@@ -129,7 +129,7 @@
         .changelog_entry h4 {
             font-size: 15px;
             font-weight: 700;
-            color: #6C5CE7;
+            color: #27BEF5;
             margin-bottom: 10px;
         }
         /* Description markdown beautification */
@@ -211,25 +211,25 @@
         }
     </style>
     <script src="../../web/index.js"></script>
-    <meta name="description" content="Lana by Narf · 15.0 to 26.0">
-    <meta property="og:title" content="Lana">
-    <meta property="og:description" content="Lana by Narf · 15.0 to 26.0">
-    <meta property="og:image" content="../../assets/com.narf.lana/banner.png">
+    <meta name="description" content="Example Package by Example Developer · 15.0 to 17.0">
+    <meta property="og:title" content="Example Package">
+    <meta property="og:description" content="Example Package by Example Developer · 15.0 to 17.0">
+    <meta property="og:image" content="../../assets/com.example.package/banner.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lana">
-    <meta name="twitter:description" content="Lana by Narf · 15.0 to 26.0">
-    <meta name="twitter:image" content="https:///repo/assets/com.narf.lana/banner.png">
-    <meta name="theme-color" content="#6C5CE7">
+    <meta name="twitter:title" content="Example Package">
+    <meta name="twitter:description" content="Example Package by Example Developer · 15.0 to 17.0">
+    <meta name="twitter:image" content="https:///repo/assets/com.example.package/banner.png">
+    <meta name="theme-color" content="#27BEF5">
 </head>
 <body>
     <div class="body">
-        <div style="background-image: url(../../assets/com.narf.lana/banner.png)" class="banner_underlay"></div>
+        <div style="background-image: url(../../assets/com.example.package/banner.png)" class="banner_underlay"></div>
         <div class="package package_head">
-            <img src="../../assets/com.narf.lana/icon.png">
+            <img src="../../assets/com.example.package/icon.png">
             <div class="package_info">
-                <h1 class="package_name">Lana</h1>
-                <p class="package_caption">Narf</p>
-                
+                <h1 class="package_name">Example Package</h1>
+                <p class="package_caption">Example Developer</p>
+                <div class="badge-group"><span class="meta-badge meta-badge-active">Active</span><span class="meta-badge meta-badge-stable">Stable</span><span class="meta-badge">rootless / roothide</span><span class="meta-badge">iphoneos-arm64, iphoneos-arm64e</span></div>
             </div>
         </div>
         <div class="nav">
@@ -238,50 +238,93 @@
         </div>
         <div class="tweak_info">
             
-            <div class="summary-box">Lana iOS Theme</div>
-            <div class="md_view"><h1>Lana</h1>
-<p>Lana is a premium iOS theme designed with a clean and distinctive visual style.</p>
-<p>Designed by Narf.</p>
+            <div class="summary-box">An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.</div>
+            <div class="md_view"><h1>Example Package</h1>
+<p>This is an example <code>description.md</code> file for Silex.</p>
+<p>Use this file as the main body of your package depiction. Unlike the short <code>tagline</code> in <code>index.json</code>, this Markdown document can contain a richer introduction, feature list, compatibility notes, setup instructions, migration guidance, and support information.</p>
+<h2>What this example demonstrates</h2>
+<ul>
+<li>Stable release channel metadata</li>
+<li>Active package status labeling</li>
+<li>Rootless and Roothide install environment tags</li>
+<li>ElleKit injection labeling</li>
+<li>Installation notes and known conflicts</li>
+<li>Migration and replacement notices</li>
+<li>Structured changelog rendering</li>
+<li>Homepage, source link, and social link support</li>
+</ul>
+<h2>Suggested real-world usage</h2>
+<p>Write this file as the main public landing page for your package:</p>
+<ul>
+<li>Explain what the tweak or app does</li>
+<li>Call out supported jailbreak environments</li>
+<li>Add setup instructions and known caveats</li>
+<li>Describe upgrade paths from older builds</li>
+<li>Link users to support, source, or issue trackers</li>
+</ul>
+<h2>Compatibility example</h2>
+<ul>
+<li>Environment: Rootless / Roothide</li>
+<li>Injection: ElleKit</li>
+<li>Architectures: <code>iphoneos-arm64</code>, <code>iphoneos-arm64e</code></li>
+<li>Supported iOS: 15.0–17.0</li>
+</ul>
+<p>Replace this file with your own package description when creating a real repo.</p>
 </div>
-            
-            
-            
-            
+            <h3>兼容信息 Compatibility</h3><div class="matrix-grid"><div class="matrix-item"><div class="matrix-title">Install Environment</div><div class="matrix-text">rootless / roothide</div></div><div class="matrix-item"><div class="matrix-title">Injection</div><div class="matrix-text">ellekit</div></div><div class="matrix-item"><div class="matrix-title">Architectures</div><div class="matrix-text">iphoneos-arm64, iphoneos-arm64e</div></div><div class="matrix-item"><div class="matrix-title">Release Channel</div><div class="matrix-text">Stable</div></div></div>
+            <h3>安装说明 Install Notes</h3><div class="info-list"><div class="info-list-item">Choose the Roothide build only if your jailbreak environment requires it.</div><div class="info-list-item">Restart the target app after changing settings.</div><div class="info-list-item">Import the included demo configuration after first install if you want sample data.</div></div>
+            <h3>已知冲突 Known Conflicts</h3><div class="info-list"><div class="info-list-item">Do not install together with ExampleConflict.</div><div class="info-list-item">Disable old legacy hooks before upgrading from rootful-era builds.</div></div>
+            <h3>迁移与替代 Migration & Replacement</h3><div class="info-list"><div class="info-list-item">This example replaces the older com.example.package.legacy layout.</div><div class="info-list-item">Rootful users should migrate to the dedicated compatibility branch instead.</div></div>
             <h3>插件信息 Info</h3>
             <div class="table">
                 <div class="cell">
                     <div class="title">开发者 Developer</div>
-                    <div class="text">Narf</div>
+                    <div class="text">Example Developer</div>
                     <br><br>
                 </div>
                 <div class="cell">
                     <div class="title">版本 Version</div>
-                    <div class="text">1.3</div>
+                    <div class="text">1.0.0</div>
                     <br><br>
                 </div>
                 <div class="cell">
                     <div class="title">兼容性 Compatibility</div>
-                    <div class="text">15.0 to 26.0</div>
+                    <div class="text">15.0 to 17.0</div>
                     <br><br>
                 </div>
                 <div class="cell">
                     <div class="title">分类 Section</div>
-                    <div class="text">Themes</div>
+                    <div class="text">Tweaks</div>
                     <br><br>
                 </div>
             </div>
             <div class="resource-grid">
+                <a href="https://example.com" class="table-btn"><div>项目主页 Homepage</div></a>
+                <a href="https://github.com/example/example-package" class="table-btn"><div>源代码 Source Code</div></a>
+            </div>
+            <h3>开发者链接 Links</h3>
+            <div class="social-links">
+                <a href="https://example.com" class="social-pill">Website</a>
+                <a href="https://github.com/example" class="social-pill">GitHub</a>
             </div>
         </div>
         <div class="changelog">
             <div class="changelog_entry">
-                <h4>1.3</h4>
-                <div class="md_view"><p>Initial release.</p>
+                <h4>1.0.0</h4>
+                <div class="md_view"><p><strong>New</strong></p>
+<ul>
+<li>Added example metadata for status, release channel, install environments, and compatibility display.</li>
+<li>Added demo install notes, conflict warnings, and migration notices.</li>
+</ul>
+<p><strong>Improve</strong></p>
+<ul>
+<li>Improved package depiction examples for modern Silex repos.</li>
+</ul>
 </div>
             </div>
         </div>
         <div class="caption center footer">Lana Repo</div>
     </div>
 </body>
-<script>compatible("15.0","26.0","15.0 to 26.0");externalize()</script>
+<script>compatible("15.0","17.0","15.0 to 17.0");externalize()</script>
 </html>

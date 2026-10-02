@@ -1,19 +1,57 @@
 Package: com.narf.lana
 Version: 1.3
-Architecture: iphoneos-arm
+Architecture: iphoneos-arm64
 Maintainer: Narf
+Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
-Size: 10115338
-MD5sum: 112eb413b219c0486cb3a1a7fe88e30d
-SHA1: 4b0df592f64ba170532827566fa81821ce131189
-SHA256: bfdd492d7e5ec63a89c3c2fc500723229f6a641bd492aa3f9864eac87ee92c58
+Size: 5087596
+MD5sum: a5bc9c8f71473668d426a11ad767c570
+SHA1: cd0ede2514cf45d4ed3f47187c7fd77dbc57a331
+SHA256: 91226cccae01b68bf36a7d89c7a69ba6e61dad6464fdda1cea7716eb9fa437d0
 Section: Themes
 Description: Lana iOS Theme
 Author: Narf
-Depiction: https:///repo/depiction/web/com.narf.lana.html
-Icon: https:///repo/assets/com.narf.lana/icon.png
-Moderndepiction: https:///repo/depiction/native/com.narf.lana.json
 Name: Lana
-Sileodepiction: https:///repo/depiction/native/com.narf.lana.json
-Tags: compatible_min::ios15.0, compatible_max::ios26.0
+Depiction: https:///repo/depiction/web/com.narf.lana.html
+SileoDepiction: https:///repo/depiction/native/com.narf.lana.json
+ModernDepiction: https:///repo/depiction/native/com.narf.lana.json
+Icon: https:///repo/assets/com.narf.lana/icon.png
 
+Package: com.narf.lana
+Version: 1.3
+Architecture: iphoneos-arm64e
+Maintainer: Narf
+Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
+Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
+Size: 5079420
+MD5sum: e9ab1df4ff05b6cf4b200e6e8a445ece
+SHA1: 70f47e3f72d0024fe51c801ab85fbdac4f203184
+SHA256: a8ee9b67c0d6f5bcbfa14b3b282d18204cb3db8ef423302b08c8050a0c77005e
+Section: Themes
+Description: Lana iOS Theme
+Author: Narf
+Name: Lana
+Depiction: https:///repo/depiction/web/com.narf.lana.html
+SileoDepiction: https:///repo/depiction/native/com.narf.lana.json
+ModernDepiction: https:///repo/depiction/native/com.narf.lana.json
+Icon: https:///repo/assets/com.narf.lana/icon.png
+
+Package: im.mjh.wclocate
+Version: 4.0.0
+Architecture: iphoneos-arm64
+Maintainer: junhong
+Installed-Size: 272
+Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
+Filename: ./pkg/im.mjh.wclocate.deb
+Size: 34798
+MD5sum: d38b20d3028e0b926556520435db801b
+SHA1: 6bc3c71812c71014692399006a5835c2e4837400
+SHA256: fb075ab097d31490a5cb07b33e6772d6a2442e2f0966429aedb821ec6728259f
+Section: Tweaks
+Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
+Author: junhong
+Name: WCLocate
+Depiction: https:///repo/depiction/web/im.mjh.wclocate.html
+SileoDepiction: https:///repo/depiction/native/im.mjh.wclocate.json
+ModernDepiction: https:///repo/depiction/native/im.mjh.wclocate.json
+Icon: https:///repo/assets/im.mjh.wclocate/icon.png

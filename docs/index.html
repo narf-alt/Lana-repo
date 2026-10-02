@@ -1,44 +1,445 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=0">
     <title>Lana Repo</title>
-    <link rel="stylesheet" type="text/css" href="web/index.css">
-    <style>a, .tint {color: #6C5CE7} .active {color: #6C5CE7}</style>
-    <meta name="description" content="Official Lana iOS Theme Repository">
-    <meta property="og:title" content="Lana Repo">
-    <meta property="og:description" content="Official Lana iOS Theme Repository">
-    <meta property="og:image" content="https:///repo/CydiaIcon.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lana Repo">
-    <meta name="twitter:description" content="Official Lana iOS Theme Repository">
-    <meta name="twitter:image" content="https:///repo/CydiaIcon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { color-scheme: light dark; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            min-height: 100vh;
+            padding: 32px 18px 56px;
+        }
+        .page { max-width: 1080px; margin: 0 auto; }
+        .hero {
+            background: linear-gradient(135deg, #6C5CE7, #7dd3fc);
+            color: #fff;
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 18px 50px rgba(39, 190, 245, 0.20);
+            margin-bottom: 28px;
+        }
+        .hero-top {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .brand { min-width: 260px; flex: 1; }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.18);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            backdrop-filter: blur(14px);
+        }
+        h1 { font-size: 34px; line-height: 1.1; margin-bottom: 10px; }
+        .hero-desc {
+            max-width: 620px;
+            font-size: 16px;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.88);
+        }
+        .hero-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        .hero-meta span {
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.12);
+        }
+        .actions {
+            width: 300px;
+            max-width: 100%;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 18px;
+            backdrop-filter: blur(18px);
+        }
+        .actions h2 { font-size: 16px; margin-bottom: 12px; }
+        .btn {
+            display: block;
+            text-decoration: none;
+            padding: 14px 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+            text-align: center;
+        }
+        .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .btn-primary { background: #fff; color: #6C5CE7; }
+        .btn-secondary {
+            background: rgba(255,255,255,0.14);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.16);
+        }
+        .actions-note {
+            margin-top: 8px;
+            font-size: 12px;
+            line-height: 1.55;
+            color: rgba(255,255,255,0.82);
+        }
+        .section { margin-top: 32px; }
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .section-head h2 { font-size: 22px; line-height: 1.2; }
+        .section-head p { color: #6e6e73; font-size: 14px; }
+        .announcement-list { display: grid; gap: 12px; }
+        .announcement {
+            background: #fff;
+            border-radius: 18px;
+            padding: 18px;
+            border-left: 4px solid #6C5CE7;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .announcement.warning { border-left-color: #ff9f0a; }
+        .announcement.error { border-left-color: #ff453a; }
+        .announcement.success { border-left-color: #30d158; }
+        .announcement-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .toolbar input, .toolbar select {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid #dcdce2;
+            background: #fff;
+            color: inherit;
+            padding: 13px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+        .channel-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .channel-pill {
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(39, 190, 245, 0.1);
+            color: #6C5CE7;
+        }
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 16px;
+        }
+        .featured-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-radius: 22px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            min-height: 172px;
+            background: #d1d5db center/cover no-repeat;
+            text-decoration: none;
+            color: #fff;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.66), rgba(0,0,0,0.22) 55%, rgba(0,0,0,0.45));
+        }
+        .featured-content { position: relative; z-index: 1; padding: 18px 20px; }
+        .featured-content h3 { font-size: 22px; line-height: 1.25; margin-bottom: 6px; overflow-wrap: anywhere; }
+        .featured-content p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.92);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            max-height: 3em;
+        }
+        .featured-badges, .package-badges, .package-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .meta-badge, .tag {
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .meta-badge { background: rgba(255,255,255,0.18); color: #fff; }
+        .meta-badge.stable, .tag.stable { background: rgba(48, 209, 88, 0.14); color: #30d158; }
+        .meta-badge.beta, .tag.beta { background: rgba(255, 159, 10, 0.14); color: #ff9f0a; }
+        .meta-badge.experimental, .tag.experimental { background: rgba(191, 90, 242, 0.14); color: #bf5af2; }
+        .meta-badge.deprecated, .tag.deprecated { background: rgba(255, 69, 58, 0.14); color: #ff453a; }
+        .meta-badge.nightly, .tag.nightly { background: rgba(90, 200, 250, 0.14); color: #5ac8fa; }
+        .section-block {
+            background: #fff;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 18px;
+        }
+        .section-title { font-size: 18px; margin-bottom: 16px; }
+        .package-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+            gap: 14px;
+        }
+        .package-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: #fafafc;
+            border: 1px solid #ececf1;
+            border-radius: 18px;
+            padding: 16px;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+            border-color: rgba(39, 190, 245, 0.24);
+        }
+        .package-card[hidden] { display: none; }
+        .package-card-top { display: flex; gap: 14px; align-items: flex-start; }
+        .package-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 16px;
+            flex-shrink: 0;
+            background: #e5e7eb;
+        }
+        .package-main { min-width: 0; flex: 1; }
+        .package-name { font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 4px; overflow-wrap: anywhere; }
+        .package-meta {
+            font-size: 13px;
+            color: #6e6e73;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .package-summary {
+            font-size: 14px;
+            line-height: 1.65;
+            color: #3c3c43;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .empty-state {
+            display: none;
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 16px;
+            background: #fff;
+            color: #6e6e73;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .footer { margin-top: 36px; text-align: center; font-size: 13px; color: #8e8e93; }
+        @media (max-width: 880px) {
+            .toolbar { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 720px) {
+            body { padding: 20px 14px 42px; }
+            .hero { padding: 24px 20px; }
+            h1 { font-size: 28px; }
+            .actions { width: 100%; }
+            .section-block { padding: 18px; }
+            .toolbar { grid-template-columns: 1fr; }
+        }
+        @media (prefers-color-scheme: dark) {
+            body { background: #000; color: #f5f5f7; }
+            .section-head p, .package-meta, .footer, .empty-state { color: #98989d; }
+            .announcement, .section-block, .empty-state {
+                background: #161618;
+                box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+            }
+            .toolbar input, .toolbar select {
+                background: #1c1c1e;
+                border-color: #2b2b2f;
+                color: #f5f5f7;
+            }
+            .package-card { background: #1c1c1e; border-color: #2b2b2f; }
+            .package-summary { color: #d2d2d7; }
+            .package-icon { background: #2b2b2f; }
+        }
+    </style>
     <meta name="theme-color" content="#6C5CE7">
 </head>
 <body>
-    <div class="body">
-        <h1 class="header left_float">Lana Repo</h1>
-        <a class="header right_float add_sileo tint" href="cydia://url/https://cydia.saurik.com/api/share#?source=https:///repo">+</a>
-        <div class="scroll_view">
-            <a href="depiction/web/com.narf.lana.html" style="background-image: url(assets/com.narf.lana/banner.png)" class="card">
-                <p>Lana</p>
-            </a>
-        </div>
-        <h2 class="header">Packages</h2>
-        <div class="packageList">
-                <a class="subtle_link" href="depiction/web/com.narf.lana.html">
-                    <div class="package">
-                        <img src="assets/com.narf.lana/icon.png">
-                        <div class="package_info">
-                            <p class="package_name">Lana</p>
-                            <p class="package_caption">Narf</p>
-                        </div>
+    <div class="page">
+        <section class="hero">
+            <div class="hero-top">
+                <div class="brand">
+                    <div class="badge">Silex static repo</div>
+                    <h1>Lana Repo</h1>
+                    <p class="hero-desc">Official Lana iOS Theme Repository</p>
+                    <div class="hero-meta">
+                        <span>3 packages</span>
+                        <span>Web + native depictions</span>
+                    </div>
+                    <div class="channel-pills">
+                        <span class="channel-pill">Stable · 3</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <h2>Add this repo</h2>
+                    <a class="btn btn-primary" href="sileo://source/https:///repo">Add in Sileo</a>
+                    <a class="btn btn-secondary" href="cydia://url/https://cydia.saurik.com/api/share#?source=https:///repo">Add in Cydia</a>
+                    <a class="btn btn-secondary" href="zbra://sources/add/https:///repo">Add in Zebra</a>
+                    <p class="actions-note">Add this repository in your preferred package manager.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <h2>Featured packages</h2>
+                    <p>Highlighted packages from this repository.</p>
+                </div>
+            </div>
+            <div class="featured-grid">
+                <a class="featured-card package-entry" href="depiction/web/im.mjh.wclocate.html" style="background-image: url(assets/im.mjh.wclocate/banner.png)"
+                   data-name="WCLocate" data-bundle="im.mjh.wclocate" data-developer="junhong" data-section="Tweaks"
+                   data-status="active" data-channel="stable" data-env="" data-arch="iphoneos-arm64">
+                    <div class="featured-content">
+                        <h3>WCLocate</h3>
+                        <p>微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏</p>
                     </div>
                 </a>
-        </div>
-        <div class="caption center footer">Lana Repo</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <h2>Browse packages</h2>
+                    <p>Search by package name, developer, or bundle identifier.</p>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <input id="search-input" type="search" placeholder="Search packages, developers, bundle IDs...">
+                <select id="status-filter">
+                    <option value="">All statuses</option>
+                    <option value="active">Active</option>
+                    <option value="beta">Beta</option>
+                    <option value="experimental">Experimental</option>
+                    <option value="deprecated">Deprecated</option>
+                    <option value="internal">Internal</option>
+                    <option value="archived">Archived</option>
+                </select>
+                <select id="channel-filter">
+                    <option value="">All channels</option>
+                    <option value="stable">Stable</option>
+                    <option value="beta">Beta</option>
+                    <option value="nightly">Nightly</option>
+                    <option value="experimental">Experimental</option>
+                </select>
+                <select id="env-filter">
+                    <option value="">All environments</option>
+                    <option value="rootless">Rootless</option>
+                    <option value="roothide">Roothide</option>
+                    <option value="rootful">Rootful</option>
+                </select>
+            </div>
+
+            <div class="section-block package-section" data-section-name="Tweaks">
+                <h3 class="section-title">Tweaks</h3>
+                <div class="package-list">
+                    <a class="package-card package-entry" href="depiction/web/com.example.package.html"
+                       data-name="Example Package" data-bundle="com.example.package" data-developer="Example Developer" data-section="Tweaks"
+                       data-status="active" data-channel="stable" data-env="rootless / roothide" data-arch="iphoneos-arm64, iphoneos-arm64e">
+                        <div class="package-card-top">
+                            <img class="package-icon" src="assets/com.example.package/icon.png" alt="Example Package">
+                            <div class="package-main">
+                                <div class="package-name">Example Package</div>
+                                <div class="package-meta">Example Developer · v1.0.0 · iOS 15.0–17.0</div>
+                                <div class="package-summary">An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.</div>
+                                <div class="package-badges">
+                                    <span class="tag active">Active</span>
+                                    <span class="tag stable">Stable</span>
+                                    <span class="tag">rootless / roothide</span>
+                                    <span class="tag">iphoneos-arm64, iphoneos-arm64e</span>
+                                </div>
+                                <div class="package-tags">
+                                    <span class="tag">Homepage</span>
+                                    <span class="tag">Source</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="package-card package-entry" href="depiction/web/im.mjh.wclocate.html"
+                       data-name="WCLocate" data-bundle="im.mjh.wclocate" data-developer="junhong" data-section="Tweaks"
+                       data-status="active" data-channel="stable" data-env="" data-arch="iphoneos-arm64">
+                        <div class="package-card-top">
+                            <img class="package-icon" src="assets/im.mjh.wclocate/icon.png" alt="WCLocate">
+                            <div class="package-main">
+                                <div class="package-name">WCLocate</div>
+                                <div class="package-meta">junhong · v4.0.0 · iOS 15.0–18.0</div>
+                                <div class="package-summary">微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="section-block package-section" data-section-name="Themes">
+                <h3 class="section-title">Themes</h3>
+                <div class="package-list">
+                    <a class="package-card package-entry" href="depiction/web/com.narf.lana.html"
+                       data-name="Lana" data-bundle="com.narf.lana" data-developer="Narf" data-section="Themes"
+                       data-status="active" data-channel="stable" data-env="" data-arch="iphoneos-arm64">
+                        <div class="package-card-top">
+                            <img class="package-icon" src="assets/com.narf.lana/icon.png" alt="Lana">
+                            <div class="package-main">
+                                <div class="package-name">Lana</div>
+                                <div class="package-meta">Narf · v1.3 · iOS 15.0–26.0</div>
+                                <div class="package-summary">Lana iOS Theme</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="empty-state" id="empty-state">No packages match the current filters.</div>
+        </section>
+
+        <div class="footer">Lana Repo</div>
     </div>
-</body>
     <script src="web/index.js"></script>
+    <script>repoSearchInit();</script>
+</body>
 </html>

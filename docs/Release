@@ -3,10 +3,12 @@ Label: Lana Repo
 Suite: stable
 Version: 1.0
 Codename: ios
-Architectures: iphoneos-arm
+Architectures: iphoneos-arm64
 Components: main
 Description: Official Lana iOS Theme Repository
 
 SHA256:
- ca2deedf850c0519fe2691df07faa0a7020b2fa3736e1ac1bf1ee666d645f0b8 436 Packages.bz2
- cf52ff9d0bac8c1b5ef9f69d42d1cfd9e23a8545314e4d38d40ab74058ff8c77 460 Packages.xz
+ 6a1c45390a67bee20a03495b236294a7fbc7d970f28c5150d58caaab3c1a90bb 2153 Packages
+ d36d72505226edeab5e5190a3ffa8fe8c6763ef916c973ed95639ddbd8128ffb 1029 Packages.bz2
+ 422305bac0bc0f54977c56ed9c8e244b2f7cdaa3e19757920a1cd46bc4090c91 884 Packages.xz
+ 1795139bc253d6451c40731ebc1b376db37fedb6cf805de37532ef7ef254e5c5 869 Packages.zst
