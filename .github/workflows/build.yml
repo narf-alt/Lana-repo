@@ -34,19 +34,33 @@ jobs:
           p = Path("silex/util/DebianPackager.py")
           s = p.read_text()
 
-          s = s.replace(
-              "subprocess.run(['mv', control_tar.replace('.xz', ''), 'control.tar'], cwd=tmpdir, check=True)\n",
-              ""
-          )
+          old_gz = """        elif control_tar.endswith('.gz'):
+              subprocess.run(['gunzip', '-k', control_tar], cwd=tmpdir, check=True)
+              subprocess.run(['mv', control_tar.replace('.gz', ''), 'control.tar'], cwd=tmpdir, check=True)
+          """
 
-          s = s.replace(
-              "subprocess.run(['mv', control_tar.replace('.gz', ''), 'control.tar'], cwd=tmpdir, check=True)\n",
-              ""
-          )
+          new_gz = """        elif control_tar.endswith('.gz'):
+              subprocess.run(['gunzip', '-k', control_tar], cwd=tmpdir, check=True)
+          """
+
+          old_xz = """        elif control_tar.endswith('.xz'):
+              subprocess.run(['unxz', '-k', control_tar], cwd=tmpdir, check=True)
+              subprocess.run(['mv', control_tar.replace('.xz', ''), 'control.tar'], cwd=tmpdir, check=True)
+          """
+
+          new_xz = """        elif control_tar.endswith('.xz'):
+              subprocess.run(['unxz', '-k', control_tar], cwd=tmpdir, check=True)
+          """
+
+          if old_gz in s:
+              s = s.replace(old_gz, new_gz)
+
+          if old_xz in s:
+              s = s.replace(old_xz, new_xz)
 
           p.write_text(s)
 
-          print("Silex DebianPackager patched successfully.")
+          print("Silex DebianPackager fixed successfully.")
           PY
 
       - name: Install Python dependencies
