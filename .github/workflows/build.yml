@@ -74,6 +74,27 @@ jobs:
           cd silex
           python3 index.py
 
+      - name: Fix Release architectures
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          release = Path("silex/docs/Release")
+          text = release.read_text()
+
+          old = "Architectures: iphoneos-arm64"
+          new = "Architectures: iphoneos-arm64 iphoneos-arm64e"
+
+          if old not in text:
+              raise SystemExit("Could not find the Architectures line in Release.")
+
+          text = text.replace(old, new, 1)
+          release.write_text(text)
+
+          print("Release architectures fixed:")
+          print("Architectures: iphoneos-arm64 iphoneos-arm64e")
+          PY
+
       - name: Add uncompressed Packages file
         run: |
           xz -d -c silex/docs/Packages.xz > silex/docs/Packages
