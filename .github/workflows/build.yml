@@ -30,38 +30,36 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
-          p = Path("silex/util/DebianPackager.py")
-          s = p.read_text()
+          path = Path("silex/util/DebianPackager.py")
+          text = path.read_text()
 
-          old_gz = """        elif control_tar.endswith('.gz'):
-              subprocess.run(['gunzip', '-k', control_tar], cwd=tmpdir, check=True)
-              subprocess.run(['mv', control_tar.replace('.gz', ''), 'control.tar'], cwd=tmpdir, check=True)
-          """
+          text = re.sub(
+              r"^[ \t]*subprocess\.run\(\['mv', control_tar\.replace\('\.gz', ''\), 'control\.tar'\], cwd=tmpdir, check=True\)[ \t]*\n",
+              "",
+              text,
+              flags=re.MULTILINE
+          )
 
-          new_gz = """        elif control_tar.endswith('.gz'):
-              subprocess.run(['gunzip', '-k', control_tar], cwd=tmpdir, check=True)
-          """
+          text = re.sub(
+              r"^[ \t]*subprocess\.run\(\['mv', control_tar\.replace\('\.xz', ''\), 'control\.tar'\], cwd=tmpdir, check=True\)[ \t]*\n",
+              "",
+              text,
+              flags=re.MULTILINE
+          )
 
-          old_xz = """        elif control_tar.endswith('.xz'):
-              subprocess.run(['unxz', '-k', control_tar], cwd=tmpdir, check=True)
-              subprocess.run(['mv', control_tar.replace('.xz', ''), 'control.tar'], cwd=tmpdir, check=True)
-          """
+          path.write_text(text)
 
-          new_xz = """        elif control_tar.endswith('.xz'):
-              subprocess.run(['unxz', '-k', control_tar], cwd=tmpdir, check=True)
-          """
-
-          if old_gz in s:
-              s = s.replace(old_gz, new_gz)
-
-          if old_xz in s:
-              s = s.replace(old_xz, new_xz)
-
-          p.write_text(s)
-
-          print("Silex DebianPackager fixed successfully.")
+          print("Checking patched DebianPackager.py...")
           PY
+
+          python3 -m py_compile silex/util/DebianPackager.py
+
+          echo "Silex DebianPackager syntax check passed."
+
+          echo "Remaining problematic mv commands:"
+          grep -n "control_tar.replace" silex/util/DebianPackager.py || true
 
       - name: Install Python dependencies
         run: |
