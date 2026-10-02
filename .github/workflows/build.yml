@@ -26,6 +26,29 @@ jobs:
         run: |
           git clone https://github.com/5hux1n/Silex.git silex
 
+      - name: Fix Silex DebianPackager
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("silex/util/DebianPackager.py")
+          s = p.read_text()
+
+          s = s.replace(
+              "subprocess.run(['mv', control_tar.replace('.xz', ''), 'control.tar'], cwd=tmpdir, check=True)\n",
+              ""
+          )
+
+          s = s.replace(
+              "subprocess.run(['mv', control_tar.replace('.gz', ''), 'control.tar'], cwd=tmpdir, check=True)\n",
+              ""
+          )
+
+          p.write_text(s)
+
+          print("Silex DebianPackager patched successfully.")
+          PY
+
       - name: Install Python dependencies
         run: |
           python3 -m pip install --break-system-packages -r silex/requirements.txt
