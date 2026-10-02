@@ -35,31 +35,30 @@ jobs:
           path = Path("silex/util/DebianPackager.py")
           text = path.read_text()
 
-          text = re.sub(
+          patterns = [
               r"^[ \t]*subprocess\.run\(\['mv', control_tar\.replace\('\.gz', ''\), 'control\.tar'\], cwd=tmpdir, check=True\)[ \t]*\n",
-              "",
-              text,
-              flags=re.MULTILINE
-          )
-
-          text = re.sub(
               r"^[ \t]*subprocess\.run\(\['mv', control_tar\.replace\('\.xz', ''\), 'control\.tar'\], cwd=tmpdir, check=True\)[ \t]*\n",
-              "",
-              text,
-              flags=re.MULTILINE
-          )
+              r"^[ \t]*subprocess\.run\(\['mv', 'control\.tar\.gz', control_tar\], cwd=tmpdir, check=True\)[ \t]*\n",
+              r"^[ \t]*subprocess\.run\(\['mv', 'control\.tar\.xz', control_tar\], cwd=tmpdir, check=True\)[ \t]*\n",
+          ]
+
+          for pattern in patterns:
+              text, count = re.subn(pattern, "", text, flags=re.MULTILINE)
+              print(f"Removed {count} matching command(s).")
 
           path.write_text(text)
-
-          print("Checking patched DebianPackager.py...")
           PY
 
+          echo "Checking DebianPackager.py syntax..."
           python3 -m py_compile silex/util/DebianPackager.py
 
-          echo "Silex DebianPackager syntax check passed."
+          echo "Checking for remaining broken mv commands..."
+          if grep -nE "mv.*control_tar|mv.*control\.tar\.(gz|xz).*control_tar" silex/util/DebianPackager.py; then
+            echo "ERROR: Broken control.tar mv command still exists."
+            exit 1
+          fi
 
-          echo "Remaining problematic mv commands:"
-          grep -n "control_tar.replace" silex/util/DebianPackager.py || true
+          echo "Silex DebianPackager fixed successfully."
 
       - name: Install Python dependencies
         run: |
