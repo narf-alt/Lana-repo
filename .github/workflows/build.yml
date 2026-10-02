@@ -22,37 +22,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git gnupg dpkg python3-pip xz-utils
 
-      - name: Clone Silica
+      - name: Clone Silex
         run: |
-          git clone https://github.com/Shugabuga/Silica.git silica
+          git clone https://github.com/5hux1n/Silex.git silex
 
       - name: Install Python dependencies
         run: |
-          python3 -m pip install --break-system-packages -r silica/requirements.txt
+          python3 -m pip install --break-system-packages -r silex/requirements.txt
 
       - name: Copy repository files
         run: |
-          cp -r Packages silica/
-          cp -r Styles silica/
+          cp -r Packages silex/
+          cp -r Styles silex/
 
-      - name: Build with Silica
+      - name: Build with Silex
         run: |
-          cd silica
+          cd silex
           python3 index.py
 
       - name: Add uncompressed Packages file
         run: |
-          xz -d -c silica/docs/Packages.xz > silica/docs/Packages
+          xz -d -c silex/docs/Packages.xz > silex/docs/Packages
 
       - name: Copy generated repository
         run: |
           rm -rf docs
-          cp -r silica/docs docs
+          cp -r silex/docs docs
 
       - name: Commit generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs
-          git diff --cached --quiet || git commit -m "Build Lana repo"
+          git diff --cached --quiet || git commit -m "Build Lana repo with Silex"
           git push
