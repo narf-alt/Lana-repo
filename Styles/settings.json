@@ -2,7 +2,7 @@
   "name": "Lana Repo",
   "description": "Official Lana iOS Theme Repository",
   "tint": "#6C5CE7",
-  "cname": "",
+  "cname": "narf-alt.github.io",
   "maintainer": {
     "name": "Narf",
     "email": "narf.ios26@gmail.com"
@@ -14,7 +14,7 @@
     }
   ],
   "automatic_git": "false",
-  "subfolder": "repo",
+  "subfolder": "lana-repo",
   "footer": "Lana Repo",
   "enable_gpg": "false"
 }
