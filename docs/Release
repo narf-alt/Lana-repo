@@ -1,14 +1,14 @@
-Origin: Lana Repo
-Label: Lana Repo
+Origin: Narf
+Label: Narf
 Suite: stable
 Version: 1.0
 Codename: ios
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
-Description: Official Lana iOS Theme Repository
+Description: Official Narf iOS Theme Repository
 
 SHA256:
- cd832c1378024304a691bc65de81757f42973ffc178c3bc22e1cae7da3209f65 905 Packages.zst
- af3c00e07c32689f1c0b426ff9ca0a8e06ea34ef4f6fedd6f8a2609f7b00f0e6 924 Packages.xz
- 4fdc229ceaacd364a23a29d46b11c148aaaf7ebaae026642d98e929209812574 1076 Packages.bz2
- 39422a43ddbba6296ee5261ead114de3b9c5df4ec4c1e60bc0e813d0775415a7 2475 Packages
+ 2e765a730a3398c8b047947a00b02ebfbee6b97152f158bb564a7ee781def44c 892 Packages.zst
+ 9bbac737a0d6d97c46547931262a4000bd645d1d29259e8840e7b47a529f6030 912 Packages.xz
+ 175e5f56c82e91424ffe635413aa7f80ad1414fe813d9e2be1bb4521db042d11 1059 Packages.bz2
+ 6a094a6275e90c4a687f1de187875c5c476d3dac975045f36674d0504424a4e5 2355 Packages
