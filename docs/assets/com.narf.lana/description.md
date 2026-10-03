@@ -15,4 +15,4 @@ Every detail is designed to give your Home Screen a soft, distinctive visual ide
 
 Designed and maintained by Narf.
 
-Follow @narf_ios for updates and future releases.
+Follow [@narf_ios](https://x.com/narf_ios) for updates and future releases.
