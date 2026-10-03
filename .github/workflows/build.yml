@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git gnupg dpkg python3-pip xz-utils
+          sudo apt-get install -y git gnupg dpkg python3-pip xz-utils zstd
 
       - name: Clone Silex
         run: |
@@ -49,16 +49,12 @@ jobs:
           path.write_text(text)
           PY
 
-          echo "Checking DebianPackager.py syntax..."
           python3 -m py_compile silex/util/DebianPackager.py
 
-          echo "Checking for remaining broken mv commands..."
           if grep -nE "mv.*control_tar|mv.*control\.tar\.(gz|xz).*control_tar" silex/util/DebianPackager.py; then
-            echo "ERROR: Broken control.tar mv command still exists."
+            echo "ERROR: Broken mv command still exists."
             exit 1
           fi
-
-          echo "Silex DebianPackager fixed successfully."
 
       - name: Install Python dependencies
         run: |
@@ -86,28 +82,128 @@ jobs:
           new = "Architectures: iphoneos-arm64 iphoneos-arm64e"
 
           if old not in text:
-              raise SystemExit("Could not find the Architectures line in Release.")
+              raise SystemExit("Could not find Architectures line.")
 
           text = text.replace(old, new, 1)
           release.write_text(text)
-
-          print("Release architectures fixed:")
-          print("Architectures: iphoneos-arm64 iphoneos-arm64e")
           PY
 
       - name: Add uncompressed Packages file
         run: |
           xz -d -c silex/docs/Packages.xz > silex/docs/Packages
 
+      - name: Mark Lana as commercial
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("silex/docs/Packages")
+          text = path.read_text()
+
+          package = "Package: com.narf.lana"
+
+          if package not in text:
+              raise SystemExit("Lana package was not found.")
+
+          parts = text.split("\n\n")
+          changed = False
+          output = []
+
+          for stanza in parts:
+              if stanza.startswith(package):
+                  if "Tag: cydia::commercial" not in stanza:
+                      lines = stanza.splitlines()
+
+                      insert_at = None
+
+                      for i, line in enumerate(lines):
+                          if line.startswith("Section:"):
+                              insert_at = i + 1
+                              break
+
+                      if insert_at is None:
+                          insert_at = len(lines)
+
+                      lines.insert(insert_at, "Tag: cydia::commercial")
+                      stanza = "\n".join(lines)
+                      changed = True
+
+              output.append(stanza)
+
+          path.write_text("\n\n".join(output))
+
+          if "Tag: cydia::commercial" not in path.read_text():
+              raise SystemExit("Commercial tag was not added.")
+
+          print("Lana marked as cydia::commercial.")
+          PY
+
+      - name: Regenerate compressed Packages files
+        run: |
+          xz -c -9 silex/docs/Packages > silex/docs/Packages.xz
+          bzip2 -c -9 silex/docs/Packages > silex/docs/Packages.bz2
+          zstd -q -19 -c silex/docs/Packages > silex/docs/Packages.zst
+
+      - name: Regenerate Release checksums
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          docs = Path("silex/docs")
+          release = docs / "Release"
+
+          text = release.read_text()
+
+          for name in [
+              "Packages",
+              "Packages.bz2",
+              "Packages.xz",
+              "Packages.zst"
+          ]:
+              path = docs / name
+              digest = hashlib.sha256(path.read_bytes()).hexdigest()
+              size = path.stat().st_size
+
+              old_lines = []
+
+              for line in text.splitlines():
+                  if line.endswith(f" {name}") and line[:64].strip():
+                      continue
+                  old_lines.append(line)
+
+              text = "\n".join(old_lines) + "\n"
+
+              marker = "SHA256:\n"
+
+              if marker not in text:
+                  text += "\nSHA256:\n"
+
+              text = text.replace(
+                  marker,
+                  marker + f" {digest} {size} {name}\n",
+                  1
+              )
+
+          release.write_text(text)
+          PY
+
       - name: Copy generated repository
         run: |
           rm -rf docs
           cp -r silex/docs docs
 
+      - name: Add Sileo Payment Endpoint
+        run: |
+          printf '%s\n' 'https://narf-store.narf-ios26.workers.dev/' > docs/payment_endpoint
+
       - name: Commit generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add docs
-          git diff --cached --quiet || git commit -m "Build Lana repo with Silex"
+
+          git diff --cached --quiet || git commit -m "Enable Lana commercial Sileo payments"
+
           git push
