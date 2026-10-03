@@ -7,7 +7,12 @@
     "name": "Narf",
     "email": "narf.ios26@gmail.com"
   },
-  "social": [],
+  "social": [
+    {
+      "name": "X",
+      "url": "https://x.com/narf_ios"
+    }
+  ],
   "automatic_git": "false",
   "subfolder": "repo",
   "footer": "Lana Repo",
